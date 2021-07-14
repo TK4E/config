@@ -1,0 +1,38 @@
+####    ####
+toggle_exif e
+
+quit q
+
+
+
+
+####    ####
+next_img
+prev_img
+
+zoom_in
+zoom_out
+
+scroll_up
+scroll_down
+
+scroll_right
+scroll_left
+
+
+
+
+####    ####
+next_img j
+prev_img k
+
+zoom_in h
+zoom_out l
+
+scroll_up Up
+scroll_down Down
+
+scroll_right Right
+scroll_left Left
+
+

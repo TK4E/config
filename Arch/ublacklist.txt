@@ -1,0 +1,8 @@
+*://*.csdn.net/*
+*://*.baidu.com/*
+*://*.huawei.com/*
+*://*.vmall.com/*
+*://*.bilibili.com/*
+*://*.sina.com.cn/*
+*://*.sogou.com/*
+*://*.huaweicloud.com/*

@@ -1,0 +1,16 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/sda1
+UUID=b585528d-8c8d-45e5-ae1b-c62ad9bcb291	/         	xfs       	rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota,defaults,noatime	0 0
+
+# /dev/sda2
+UUID=efbe45e6-99c3-467b-95f7-ad493d1287ff	/root     	xfs       	rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota,defaults,noatime	0 0
+
+
+/swapfile none swap defaults 0 0
+
+
+tmpfs /dev/shm tmpfs defaults,size=2048M 0 0
+

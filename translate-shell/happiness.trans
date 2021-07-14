@@ -1,0 +1,64 @@
+{
+ :translate-shell "0.9.0"
+
+ :sgr-original ["light red" "bold"]
+ :sgr-original-phonetics ["light red" "bold"]
+ :sgr-translation ["light yellow" "bold"]
+ :sgr-translation-phonetics ["light blue" "bold"]
+ :sgr-brief-translation ["light red" "bold"]
+ :sgr-brief-translation-phonetics ["light blue" "bold"]
+
+
+ :sgr-original-dictionary-detailed-word-class "light green"
+ :sgr-original-dictionary-detailed-explanation ["light green" "bold"]
+ :sgr-original-dictionary-detailed-example ["light green" "bold"]
+ :sgr-original-dictionary-detailed-synonyms "light green"
+ :sgr-original-dictionary-detailed-synonyms-item ["light green" "bold"]
+
+
+ :sgr-original-dictionary-synonyms "light gray"
+ :sgr-original-dictionary-synonyms-word-class "light gray"
+ :sgr-original-dictionary-synonyms-synonyms "light gray"
+ :sgr-original-dictionary-synonyms-synonyms-item ["light gray" "bold"]
+
+
+ :sgr-original-dictionary-examples "light gray"
+ :sgr-original-dictionary-examples-example ["light gray" "bold"]
+ :sgr-original-dictionary-examples-original ["light gray" "bold" "negative"]
+ :sgr-original-dictionary-see-also "light blue"
+ :sgr-original-dictionary-see-also-phrases "light blue"
+ :sgr-original-dictionary-see-also-phrases-item ["light yellow" "bold" "underline"]
+
+
+ :sgr-dictionary-word-class "light yellow"
+ :sgr-dictionary-word ["light green" "bold"]
+ :sgr-dictionary-explanation "light yellow"
+ :sgr-dictionary-explanation-item ["light yellow" "bold"]
+
+
+ :sgr-alternatives-original ["light green" "bold"]
+ :sgr-alternatives-translations "light yellow"
+ :sgr-alternatives-translations-item ["light yellow" "bold"]
+
+
+ :sgr-prompt-message "light blue"
+ :sgr-prompt-message-original ["light red" "bold"]
+ :sgr-languages "light red"
+ :sgr-languages-sl ["light yellow" "bold"]
+ :sgr-languages-tl ["light green" "bold"]
+ :fmt-languages "【 %s >> %t 】"
+
+
+ :chr-source-seperator "═"
+ :sgr-source-seperator "light yellow"
+ :chr-target-seperator "─"
+ :sgr-target-seperator "light yellow"
+
+
+ :fmt-welcome-message "Translate Shell"
+ :sgr-welcome-message ["light blue" "bold"]
+ :fmt-welcome-submessage "(:q to quit)"
+ :sgr-welcome-submessage "light blue"
+ :fmt-prompt "%s> "
+ :sgr-prompt ["light blue" "bold"]
+ }

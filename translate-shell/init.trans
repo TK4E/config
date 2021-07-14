@@ -1,0 +1,12 @@
+{:translate-shell "0.9.0"
+
+ :theme "happiness.trans"
+ :verbose         true
+ :show-original   true
+ :indent          2
+ :view            fales
+ :hl              "en"
+ :tl              ["zh" "jp" "de"]
+ :engine          "google"
+
+}

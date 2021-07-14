@@ -1,0 +1,11 @@
+[ "$XDG_CURRENT_DESKTOP" = "KDE"  ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME"  ] || export QT_QPA_PLATFORMTHEME="qt5ct"
+
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE=fcitx5
+export XMODIFIERS="@im=fcitx5"
+export INPUT_METHOD=fcitx5
+export XIM_SERVERS=fcitx5
+
+xrdb ~/.config/X11/xresources
+exec i3
+

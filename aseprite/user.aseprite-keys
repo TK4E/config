@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<keyboard version="1">
+    <commands>
+        <key command="RunScript" shortcut="Alt+P">
+            <param name="filename" value="/root/.config/aseprite/scripts/Draw/path_animator.lua" />
+        </key>
+        <key command="RunScript" shortcut="Alt+Down">
+            <param name="filename" value="/root/.config/aseprite/scripts/Other/move_layer/Move Layer Down.lua" />
+        </key>
+        <key command="RunScript" shortcut="Alt+Up">
+            <param name="filename" value="/root/.config/aseprite/scripts/Other/move_layer/Move Layer Up.lua" />
+        </key>
+    </commands>
+    <tools />
+    <quicktools />
+    <actions />
+    <wheel />
+</keyboard>

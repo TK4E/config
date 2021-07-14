@@ -1,0 +1,14 @@
+{
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  },
+        "rust-analyzer.serverPath": "/bin/rust-analyzer",
+        "rust-analyzer.diagnostics.enableExperimental": true,
+  "languageserver": {
+      },
+  "codeLens.enable": true,
+  "diagnostic.errorSign": "E",
+  "diagnostic.warningSign": "W",
+  "diagnostic.infoSign": "I"
+
+}

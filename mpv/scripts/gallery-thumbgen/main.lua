@@ -1,0 +1,2 @@
+require('gallery-thumbgen')
+

@@ -1,0 +1,2 @@
+require('manga-reader')
+

@@ -1,0 +1,337 @@
+" ------------------------------------------------------------------------------
+set vicmd=nvim
+set shell=/bin/bash
+set trash
+set trashdir=/tmp/Trash
+set history=100
+set nofollowlinks
+set sortnumbers
+set undolevels=100
+set vimhelp
+set norunexec
+colorscheme palenight
+set timefmt=%m/%d\ %H:%M
+set wildmenu
+set wildstyle=popup
+set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+set ignorecase
+set smartcase
+set nohlsearch
+set incsearch
+set scrolloff=4
+if !has('win')
+    set slowfs=curlftpfs
+endif
+"set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
+set statusline="  %t%= %A %10u:%-7g %15E %20d  "
+" ------------------------------------------------------------------------------
+" :mark mark /full/directory/path [filename]
+
+mark b ~/bin/
+mark h ~/
+
+" ------------------------------------------------------------------------------
+command! df df -h %m 2> /dev/null
+command! diff nvim -d %f %F
+command! zip zip -r %f.zip %f
+command! run !! ./%f
+command! make !!make %a
+command! mkcd :mkdir %a | cd %a
+command! vgrep vim "+grep %a"
+command! reload :write | restart
+
+" ------------------------------------------------------------------------------
+fileview ../ exa -TL 1 %c
+
+" Pdf
+filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
+fileviewer *.pdf pdftotext -nopgbrk %c -
+
+" txt
+fileviewer *.sh,*.py,*.c,*.cpp,*.lua,*.md,*.rst,*.rs,*.h
+        \ bat --color always --wrap never --pager never --line-range :20 %c -p ,
+
+" PostScript
+filextype *.ps,*.eps,*.ps.gz
+        \ {View in zathura}
+        \ zathura %c,
+        \ {View in gv}
+        \ gv %c %i &,
+
+" Djvu
+filextype *.djvu
+        \ {View in zathura}
+        \ zathura %c,
+        \ {View in apvlv}
+        \ apvlv %c,
+
+" Audio
+filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.aac
+        \ {View using mpv}
+        \ killall -o=1s mpv &> /dev/null ;mpv --force-window=no %c > "/dev/null" 2>&1 &,
+        \ {Play using ffplay}
+        \ killall -o=1s ffplay &> /dev/null ;ffplay -nodisp -autoexit %c,
+fileviewer *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.aac,*.opus,*.ogg
+        \ mediainfo %c 2>&1 &,
+
+" Video
+filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+         \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+         \*.as[fx]
+         \ {View using mpv}
+         \ mpv %c > "/dev/null" 2>&1 &,
+         \ {View using ffplay}
+         \ ffplay -fs -autoexit %c &,
+fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+         \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+         \*.as[fx]
+         \ mediainfo %c 2>&1 &,
+
+" Web
+filextype *.html,*.htm
+        \ {Open with dwb}
+        \ dwb %c %i &,
+        \ {Open with firefox}
+        \ firefox %c &,
+        \ {Open with uzbl}
+        \ uzbl-browser %c %i &,
+filetype *.html,*.htm links, lynx
+
+" Object
+filetype *.o nm %c | less
+
+" Man page
+filetype *.[1-8] man ./%c
+fileviewer *.[1-8] man ./%c | col -b
+
+" Images
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.webp
+        \ {View in feh}
+        \ feh -FZN %d --start-at %d/%c 2 > "/dev/null" 2>&1 &,
+        \ {View in gwenview}
+        \ gwenview -s %c,
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.webp
+        \ vifmimg draw %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+        \ viu -w %pw -h %ph -s %c ,
+
+
+" OpenRaster
+filextype *.ora
+        \ {Edit in MyPaint}
+        \ mypaint %c,
+
+" Mindmap
+filextype *.vym
+        \ {Open with VYM}
+        \ vym %c&,
+
+" MD5
+filetype *.md5
+        \ {Check MD5 hash sum}
+        \ md5sum -c %f %S,
+
+" SHA1
+filetype *.sha1
+        \ {Check SHA1 hash sum}
+        \ sha1sum -c %f %S,
+
+" SHA256
+filetype *.sha256
+        \ {Check SHA256 hash sum}
+        \ sha256sum -c %f %S,
+
+" SHA512
+filetype *.sha512
+        \ {Check SHA512 hash sum}
+        \ sha512sum -c %f %S,
+
+" GPG signature
+filetype *.asc
+        \ {Check signature}
+        \ !!gpg --verify %c,
+
+" Torrent
+filetype *.torrent
+        \ qbittorrent %c &
+fileviewer *.torrent dumptorrent -v %c
+
+" FuseZipMount
+filetype *.zip,*.jar,*.war,*.ear,*.oxt,*.apkg
+        \ {View contents}
+        \ zip -sf %c | less,
+        \ {Extract here}
+        \ tar -xf %c,
+        \ {Mount with fuse-zip}
+        \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
+fileviewer *.zip,*.jar,*.war,*.ear,*.oxt
+        \ 7z -l %c,
+
+" ArchiveMount
+filetype *.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz
+        \ {Mount with archivemount}
+        \ FUSE_MOUNT|archivemount %SOURCE_FILE %DESTINATION_DIR,
+fileviewer *.tgz,*.tar.gz tar -tzf %c
+fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
+fileviewer *.tar.txz,*.txz xz --list %c
+fileviewer *.tar,*.zst,*.tar.zst tar -tf %c
+
+filetype *.zip,*.cbz,*.czb
+        \ zathura %c &
+fileviewer *.cbz,*.czb zip -sf %c
+
+" Rar2FsMount and rar archives
+filetype *.rar
+        \ {Mount with rar2fs}
+        \ FUSE_MOUNT|rar2fs %SOURCE_FILE %DESTINATION_DIR,
+fileviewer *.rar unrar v %c
+
+" IsoMount
+filetype *.iso
+        \ {Mount with fuseiso}
+        \ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
+
+" SshMount
+filetype *.ssh
+        \ {Mount with sshfs}
+        \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR %FOREGROUND,
+
+" FtpMount
+filetype *.ftp
+        \ {Mount with curlftpfs}
+        \ FUSE_MOUNT2|curlftpfs -o ftp_port=-,,disable_eprt %PARAM %DESTINATION_DIR %FOREGROUND,
+
+" Fuse7z and 7z archives
+filetype *.7z
+        \ {Mount with fuse-7z}
+        \ FUSE_MOUNT|fuse-7z %SOURCE_FILE %DESTINATION_DIR,
+fileviewer *.7z 7z l %c
+
+" Office files
+filextype *.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx libreoffice %f &
+fileviewer *.doc catdoc %c
+fileviewer *.docx docx2txt.pl %f -
+
+" TuDu files
+filetype *.tudu tudu -f %c
+
+" Qt projects
+filextype *.pro qtcreator %f &
+
+" Directories
+filextype */
+        \ {View in thunar}
+        \ Thunar %f &,
+
+
+set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
+    \phistory,fhistory,dirstack,registers,bookmarks,bmarks
+
+" ------------------------------------------------------------------------------
+noremap ]e
+ \ :
+ \ | execute 'normal /^$'
+ \ | execute 'normal n'<cr>
+
+nnoremap [e
+ \ :
+ \ | execute 'normal ?^$'
+ \ | execute 'normal n'<cr>
+
+
+nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+
+nnoremap yf :!echo -n %c:p | xclip -selection clipboard %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
+
+
+" ------------------------------------------------------------------------------
+nnoremap s :shell<cr>
+nnoremap S :sort<cr>
+nnoremap w :view<cr>
+vnoremap w :view<cr>gv
+nnoremap o :!gvim --remote-tab-silent %f<cr>
+nnoremap O :!gvim %f<cr>
+nnoremap gb :file &<cr>l
+
+nnoremap I cw<c-a>
+nnoremap cc cw<c-u>
+nnoremap A cw
+nnoremap ,t :!xterm &<cr>
+nnoremap ,c :write | edit $MYVIFMRC | restart<cr>
+nnoremap ,C :!gvim --remote-tab-silent $MYVIFMRC &<cr>
+nnoremap ,w :set wrap!<cr>
+
+nnoremap <f3> :!less %c<cr>
+nnoremap <f4> :edit<cr>
+nnoremap <f5> :copy<cr>
+nnoremap <f6> :move<cr>
+nnoremap <f7> :mkdir<space>
+nnoremap <f8> :delete<cr>
+
+
+if has('win')
+    nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
+    nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
+elseif executable('xclip')
+    nnoremap yd :!echo %d | xclip %i<cr>
+    nnoremap yf :!echo %c:p | xclip %i<cr>
+elseif executable('xsel')
+    nnoremap yd :!echo -n %d | xsel --input --primary %i &&
+                \ echo -n %d | xsel --clipboard --input %i<cr>
+    nnoremap yf :!echo -n %c:p | xsel --input --primary %i &&
+                \ echo -n %c:p | xsel --clipboard --input %i<cr>
+endif
+
+
+
+
+" =============================================================================
+highlight User1 ctermbg=black
+highlight User2 ctermbg=green ctermfg=bule cterm=bold
+set statusline="%1* %-26t %2* %= %1* %A %2* %7u:%-7g %1* %-5s %2* %d "
+set nu
+set dirsize=nitems
+set dotdirs=rootparent
+set iec
+
+" ------------------------------------------------------------------------------
+nnoremap qq :execute '!echo %d > /tmp/vifm_dir.txt' | quit<cr>
+nnoremap <c-left> <c-w>h
+nnoremap <c-right> <c-w>l
+nnoremap ,c :write | execute ':!%n${EDITOR:-vim} $MYVIFMRC' | restart<cr>
+nnoremap <CR> :<C-U>if v:count|exe ':' v:count|else|exe 'norm! l'|endif<cr>
+nnoremap _ <C-w>s
+nnoremap + <C-w>v
+nnoremap h <C-w>h
+nnoremap l <C-w>l
+
+" nnoremap wh <C-w>h
+" nnoremap wl <C-w>l
+
+nnoremap <A-h> <Left>
+nnoremap <A-l> <Right>
+
+
+nnoremap J 2j
+nnoremap K 2k
+nnoremap <C-j> 4j
+nnoremap <C-k> 4k
+nnoremap ` :!
+
+nnoremap . za
+nnoremap ; :
+
+
+nnoremap <SPACE>a ggvGcw
+nnoremap <SPACE>z :!nohup zathura "%c"  > "/dev/null" 2>&1 &<cr>
+
+
+" %a 输入的参数
+" %d 当前目录的完整路径
+" %c 当前文的完整路径
+" %f 所有选中的文件
+" %F 在另一个面板中选中的文件
+" %D 另一个面板的当前目录
+" %S 在状态栏中显示命令输出
+" ------------------------------------------------------------------------------
