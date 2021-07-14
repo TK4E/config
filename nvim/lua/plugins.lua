@@ -77,17 +77,19 @@ return require('packer').startup(function()
         config = 'require [[Plug/vim-markdown-toc]]'
 
     }
---     use {
---         'lervag/wiki.vim',
---         ft = 'markdown',
---         run = ':WikiEnable',
---         config = 'require [[Plug/vimwiki]]'
---     }
+    --     use {
+    --         'lervag/wiki.vim',
+    --         ft = 'markdown',
+    --         run = ':WikiEnable',
+    --         config = 'require [[Plug/vimwiki]]'
+    --     }
 
--- use {
---     'lervag/vimtex',
---     ft = {'tex'}
--- }
+    -- use {
+    --     'lervag/vimtex',
+    --     ft = {'tex'}
+    -- }
+
+    use {'aquach/vim-mediawiki-editor', ft = {'wiki'}}
 
 end)
 

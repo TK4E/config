@@ -54,11 +54,20 @@ func! DeleteMM()
     exec "normal `z"
 endfunc
 
-func! MMM()
+
+func! MMP()
     exec "normal mz"
     3s/date:.*/\=system("date '+date: %Y-%m-%d %H:%M:%S'", submatch(0))[0:-2]
+    2s/$/\=expand("%:r")
     exec "normal mz"
 endfunc
+
+func! MMM()
+    exec "normal mz"
+    4s/update:.*/\=system("date '+update: %Y-%m-%d %H:%M:%S'", submatch(0))[0:-2]
+    exec "normal mz"
+endfunc
+
 
 
 
@@ -66,6 +75,7 @@ endfunc
 au BufWritePre * :call DeleteSP()
 au BufWritePre * :call DeleteMM()
 
+au BufNewFile *.md :call MMP()
 au BufWritePre *.md :call MMM()
 
 inoremap <silent><expr> <TAB>
@@ -82,3 +92,11 @@ endfunction
 
 "let g:wiki_filetypes = ['md']
 "let g:wiki_link_extension = '.md'
+
+
+
+let g:mediawiki_editor_url = "zh.wikipedia.org"
+let g:mediawiki_editor_username = "TK4E"
+let g:mediawiki_editor_path = "/w/"
+
+

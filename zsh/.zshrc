@@ -210,6 +210,7 @@ alias diff='diff -y'
 alias docker-compose='podman-compose'
 alias docker='podman'
 alias exhentai_01='hentai-downloader -u $1 -c ~/.config/exhentai/5090839'
+alias mw='proxychains -q nvim mw.mw'
 alias cutimg='mkdir /tmp/cutimg; import "/tmp/cutimg/`\date '+%Y-%m-%d_%H:%M:%S'`.png"'
 alias exif='identify -verbose'
 alias ff='time ffmpeg -hide_banner -i'
@@ -247,7 +248,7 @@ alias n_colab='nvim $MY_WT/colab.sh'
 alias n_ff='nvim $MY_WT/ffmpeg.md'
 alias st='shutdown -h 0'
 alias n_my='nvim $MY_WT/note.md'
-alias n_vim='cd ~/.config/nvim/lua ; ls'
+# alias n_vim='cd ~/.config/nvim/lua ; ls'
 alias w3m='HOME=/tmp/w3m \w3m'
 alias adb='HOME=/root/.config/android \adb'
 alias pw3m='HOME=/tmp/w3m \proxychains4 -q \w3m'
@@ -700,6 +701,15 @@ ffmusic () {
     # -c:a [ libopus | ac3 | mp3 | aac ]
 
 }
+#-------------------------
+git_clear_history() {
+    git checkout --orphan tmp-main # create a temporary branch
+    git add -A  # Add all files and commit them
+    git commit -m 'up'
+    git branch -D main # Deletes the main branch
+    git branch -m main # Rename the current branch to main
+    git push -f origin main # Force push main branch to Git server
+}
 #===============================================================================
 if [[ ! -f $XDG_DATA_HOME/zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing DHARMA Initiative Plugin Manager (zdharma/zinit)…%f"
@@ -899,3 +909,4 @@ typeset -gA AUTOPAIR_PAIRS
 
 
 #eval "$(starship init zsh)"
+

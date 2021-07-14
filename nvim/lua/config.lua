@@ -10,6 +10,7 @@ local indent = 4
 ---------------------------------------
 cmd 'au BufRead,BufNewFile,BufWritePost *.{ass,ASS,ssa,SSA,srt,SRT} set filetype=ass'
 cmd 'au BufRead,BufNewFile,BufWritePost *.{wiki,md,markdown,Markdown} set filetype=markdown'
+cmd 'au BufRead,BufNewFile,BufWritePost *.{wiki,mw,mediawiki} set filetype=wiki'
 cmd 'au BufRead,BufNewFile,BufWritePost *.{sh,bash,shell,zsh} set filetype=shell'
 cmd 'au BufWritePre,BufRead .c,.cpp,.py,.sh :normal! gg=G'
 cmd 'au FileType c,cpp,rust,shell exe ":set colorcolumn=81" | nn G'
